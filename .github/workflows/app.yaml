@@ -119,6 +119,10 @@ jobs:
             --docker-password=$(aws ecr get-login-password) \
             --dry-run=client -o yaml | kubectl apply -f -
 
+      - name: Uninstall previous Helm release
+        run: |
+          helm uninstall project8 --namespace default || true
+
       - name: Deploy Helm
         uses: bitovi/github-actions-deploy-eks-helm@v1.2.8
         with:
@@ -126,10 +130,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
           cluster-name: ${{ env.EKS_CLUSTER }}
-          #config-files: .github/values/dev.yaml
           hart-path: helm/
-          #chart-path: kubernetes/profilechart
           namespace: default
-          #values: appimage=${{ secrets.REGISTRY }}/${{ env.ECR_REPOSITORY }},apptag=${{ github.run_number }}
-          values: app.image.repository=${{ secrets.REGISTRY }}/${{ env.ECR_REPOSITORY }},app.image.tag=${{ github.run_number }}          
+          values: app.image.repository=${{ secrets.REGISTRY }}/${{ env.ECR_REPOSITORY }},app.image.tag=${{ github.run_number }}
           name: project8

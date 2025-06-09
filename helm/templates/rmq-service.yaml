@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   ports:
-  - name: http
+  - name: mq-port
     port: {{ .Values.rabbitmq.service.port }}
     targetPort: {{ .Values.rabbitmq.service.targetPort }}
     protocol: TCP
