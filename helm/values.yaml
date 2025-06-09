@@ -88,7 +88,7 @@ rabbitmq:
   service:
     name: vpromq01
     type: ClusterIP
-    port: 5672
+    port: 15672
     targetPort: mq-port
   resources:
     limits:
