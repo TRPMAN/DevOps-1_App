@@ -40,9 +40,14 @@ spec:
 
       volumes:
       - name: mysql-pvc-data
+        {{- if .Values.db.persistence.enabled }}
         persistentVolumeClaim:
           claimName: mysql-pvc
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
 
+      {{- if .Values.db.persistence.enabled }}
       # Need to make sure that /var/lib/mysql is empty
       initContainers:
       - name: busybox
@@ -51,3 +56,4 @@ spec:
         volumeMounts:
         - name: mysql-pvc-data
           mountPath: /var/lib/mysql
+      {{- end }}

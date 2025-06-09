@@ -42,7 +42,7 @@ db:
     port: 3306
     targetPort: mysql-port
   persistence:
-    enabled: true
+    enabled: false
     storageClass: default
     size: 3Gi
   resources:
