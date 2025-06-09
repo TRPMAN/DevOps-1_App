@@ -33,7 +33,7 @@ db:
   name: mysql
   replicaCount: 1
   image:
-    repository: trpman/dockerpj1_db
+    repository: vprofile/vprofiledb 
     tag: latest
     pullPolicy: IfNotPresent
   service:
