@@ -92,7 +92,7 @@ jobs:
          context: ./
     
   Deploy_To_EKS:
-    needs: BUILD_AND_PUBLISH
+    needs: Buid_And_Publish
     runs-on: ubuntu-latest
     steps:
       - name: Code checkout
