@@ -1,0 +1,113 @@
+# Default values for app Helm chart
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  namespace: default
+  domain: app.agsfva.online
+
+# Application settings
+app:
+  name: application
+  replicaCount: 1
+  image:
+    repository: trpman/dockerpj1_app
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: vproapp
+    type: ClusterIP
+    port: 8080
+    targetPort: app-port
+  resources:
+    limits:
+      cpu: 1000m      
+      memory: 1024Mi 
+    requests:
+      cpu: 500m
+      memory: 512Mi
+
+
+# Database settings
+db:
+  name: mysql
+  replicaCount: 1
+  image:
+    repository: trpman/dockerpj1_db
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: vprodb
+    type: ClusterIP
+    port: 3306
+    targetPort: mysql-port
+  persistence:
+    enabled: true
+    storageClass: default
+    size: 3Gi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  initContainer:
+    image: busybox
+    tag: latest
+
+# Memcached settings
+memcache:
+  name: memcache
+  replicaCount: 1
+  image:
+    repository: memcached
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: vprocache01
+    type: ClusterIP
+    port: 11211
+    targetPort: memcached-port
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+# RabbitMQ settings
+rabbitmq:
+  name: rabbitmq
+  replicaCount: 1
+  image:
+    repository: rabbitmq
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: vpromq01
+    type: ClusterIP
+    port: 5672
+    targetPort: mq-port
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  env:
+    user: guest
+
+# Ingress settings
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+
+# Secret settings
+secrets:
+  dbPassword: dnByb2RicGFzcw==
+  rmqPassword: Z3Vlc3Q=

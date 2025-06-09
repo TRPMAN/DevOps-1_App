@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  # Add configuration data as needed
+  app.properties: |
+    app.name={{ .Chart.Name }}
+    app.version={{ .Chart.AppVersion }}
+    app.environment={{ .Release.Namespace }}

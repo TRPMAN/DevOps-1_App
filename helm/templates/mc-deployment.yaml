@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.memcache.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app: {{ .Values.memcache.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.memcache.name }}
+  replicas: {{ .Values.memcache.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.memcache.name }}
+        app.kubernetes.io/name: {{ .Chart.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: memcache-container
+        image: "{{ .Values.memcache.image.repository }}:{{ .Values.memcache.image.tag }}"
+        imagePullPolicy: {{ .Values.memcache.image.pullPolicy }}
+        ports:
+        - name: memcached-port
+          containerPort: 11211
+        resources:
+{{ toYaml .Values.memcache.resources | indent 10 }}

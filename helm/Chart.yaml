@@ -1,0 +1,8 @@
+apiVersion: v2
+name: Helm Application
+description: A Helm chart for Application Stack
+type: application
+version: 0.1.1
+appVersion: "1.0.0"
+maintainers:
+  - name: DevOps Team

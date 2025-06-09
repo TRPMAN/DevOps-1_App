@@ -1,0 +1,20 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+To learn more about the release, try:
+
+  $ helm status {{ .Release.Name }}
+  $ helm get all {{ .Release.Name }}
+
+{{- if .Values.ingress.enabled }}
+You can access the application at:
+  http://{{ .Values.global.domain }}
+{{- else }}
+To access the application, you need to expose the service:
+
+  kubectl port-forward svc/{{ .Values.app.service.name }} {{ .Values.app.service.port }}:{{ .Values.app.service.port }}
+
+Then access the application at:
+  http://{{ .Values.global.domain }}
+{{- end }}
