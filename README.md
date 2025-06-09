@@ -1,3 +1,6 @@
+# App Repository
+This is where we going to manage our App and deploy it on EKS
+
 # Prerequisites
 #####
 - JDK 11
