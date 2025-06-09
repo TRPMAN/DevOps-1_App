@@ -11,6 +11,6 @@ spec:
     app: {{ .Values.db.name }}
   ports:
   - port: {{ .Values.db.service.port }}
-    targetPort: {{ .Values.db.service.targetPort }}
+    targetPort: vprodb-port
     protocol: TCP
   type: {{ .Values.db.service.type }}

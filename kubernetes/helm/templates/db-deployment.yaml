@@ -20,11 +20,11 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-      - name: myapp-container
+      - name: vprodb
         image: "{{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}"
         imagePullPolicy: {{ .Values.db.image.pullPolicy }}
         ports:
-        - name: mysql-port
+        - name: vprodb-port
           containerPort: 3306
         env: 
         - name: MYSQL_ROOT_PASSWORD
