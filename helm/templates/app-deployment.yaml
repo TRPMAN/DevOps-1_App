@@ -28,6 +28,9 @@ spec:
           containerPort: 8080
         resources:
 {{ toYaml .Values.app.resources | indent 10 }}
+        env:
+        - name: DB_HOST
+          value: {{ .Values.db.service.name }}
       # This will make app container deploy after all backend come up
       initContainers:
       - name: init-mysql
