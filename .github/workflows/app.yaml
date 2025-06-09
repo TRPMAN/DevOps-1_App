@@ -128,7 +128,7 @@ jobs:
           cluster-name: ${{ env.EKS_CLUSTER }}
           #config-files: .github/values/dev.yaml
           #chart-path: helm/
-          chart-path: helm/profilechart
+          chart-path: kubernetes/profilechart
           namespace: default
           values: appimage=${{ secrets.REGISTRY }}/${{ env.ECR_REPOSITORY }},apptag=${{ github.run_number }}
           #values: app.image.repository=${{ secrets.REGISTRY }}/${{ env.ECR_REPOSITORY }},app.image.tag=${{ github.run_number }}          
