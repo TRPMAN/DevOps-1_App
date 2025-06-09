@@ -33,14 +33,14 @@ db:
   name: mysql
   replicaCount: 1
   image:
-    repository: vprofile/vprofiledb 
+    repository: trpman/dockerpj1_db
     tag: latest
     pullPolicy: IfNotPresent
   service:
     name: vprodb
     type: ClusterIP
     port: 3306
-    targetPort: mysql-port
+    targetPort: vprodb-port
   persistence:
     enabled: true
     storageClass: default
