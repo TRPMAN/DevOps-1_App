@@ -18,7 +18,7 @@ on: workflow_dispatch
 env:
   AWS_REGION: us-east-1
   EKS_CLUSTER: devops-1-eks
-  ECR_REPOSITORY: ${{ secrets.REGISTRY }}
+  ECR_REPOSITORY: devops-1-app
 
 jobs:
   testing_app:
