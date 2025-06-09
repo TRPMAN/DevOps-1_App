@@ -45,7 +45,8 @@ jobs:
      
       # - name: Setup SonarQube
         # uses: warchant/setup-sonar-scanner@v7 
-
+      
+      # in SONAR_ORG is a ORG key not name
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         with:
@@ -60,13 +61,14 @@ jobs:
             -X
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
-
-      - name: SonarQube Quality Gate
-        id: sonar-qg-check
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        # Force to fail step after specific time
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
+      
+      # in SonarCloud, Create QG is not free now so we gonna skip this
+      # - name: SonarQube Quality Gate
+      #   id: sonar-qg-check
+      #   uses: sonarsource/sonarqube-quality-gate-action@master
+      #   # Force to fail step after specific time
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
